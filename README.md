@@ -1,69 +1,124 @@
-# React + TypeScript + Vite
+# 🎉 Birthday Party Invitation Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful, responsive birthday party invitation website built for Tiferet Nagarpowers' celebration at Cool Crafts of Long Island.
 
-Currently, two official plugins are available:
+## 🎨 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive RSVP Form** - Guests can RSVP with dietary requirements and special messages
+- **Calendar Integration** - Add event to Google Calendar, Outlook, Apple Calendar, and more
+- **Responsive Design** - Mobile-first design that looks great on all devices
+- **Email Notifications** - Automatic email confirmation using EmailJS
+- **Modern UI/UX** - Clean, festive design with smooth animations and transitions
 
-## Expanding the ESLint configuration
+## 📅 Event Details
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Who**: Tiferet Nagarpowers' Birthday Party
+- **When**: Sunday, August 10th, 2025 (2:00 PM - 5:00 PM)
+- **Where**: Cool Crafts of Long Island, 3443 Merrick Rd, Wantagh, NY 11793
+- **Activities**: Arts & Crafts, Birthday Fun, and More!
+- **RSVP Deadline**: August 3rd, 2025
 
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Frontend**: React 19 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS v4
+- **UI Components**: Custom components with Radix UI primitives
+- **Forms**: React Hook Form + Zod validation
+- **Email Service**: EmailJS
+- **Calendar Integration**: calendar-link library
+- **Icons**: Lucide React
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd birthday-party
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+2. Install dependencies:
+```bash
+pnpm install
 ```
+
+3. Set up environment variables:
+Create a `.env` file in the root directory with your EmailJS configuration:
+```env
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_RECIPIENT_EMAIL=your_email@example.com
+```
+
+4. Start the development server:
+```bash
+pnpm dev
+```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
+
+## 📧 EmailJS Setup
+
+This project uses EmailJS for sending RSVP confirmations. Check `EMAILJS_SETUP.md` for detailed setup instructions.
+
+## 🏗️ Build & Deploy
+
+### Build for Production
+
+```bash
+pnpm build
+```
+
+### Preview Production Build
+
+```bash
+pnpm preview
+```
+
+### Deploy to Netlify
+
+This project is optimized for Netlify deployment with serverless functions. Simply connect your repository to Netlify and it will automatically deploy.
+
+## 📱 Responsive Design
+
+The invitation is designed mobile-first with breakpoints for:
+- Mobile: 320px - 640px
+- Tablet: 640px - 1024px  
+- Desktop: 1024px+
+
+## 🎯 Project Structure
+
+```
+src/
+├── components/
+│   ├── BirthdayInvitation.tsx    # Main invitation layout
+│   ├── InvitationHeader.tsx      # Header with title and decorations
+│   ├── InvitationContent.tsx     # Event details and RSVP form
+│   ├── InvitationFooter.tsx      # Contact information
+│   ├── RSVPForm.tsx              # Interactive RSVP form with validation
+│   ├── AddToCalendar.tsx         # Calendar integration dropdown
+│   └── ui/                       # Reusable UI components
+├── lib/
+│   └── utils.ts                  # Utility functions
+└── styles/                       # CSS and styling
+```
+
+## 🤝 Contributing
+
+This is a personal event invitation website. If you'd like to use it as a template for your own event, feel free to fork and customize!
+
+## 📄 License
+
+This project is for personal use. The template structure can be used for similar event invitation websites.
+
+---
+
+**Contact**: For any questions about the event, visit [Cool Crafts of Long Island](https://www.coolcraftslongisland.com) or call (516) 735-2007.
