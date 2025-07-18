@@ -1,24 +1,113 @@
-@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Inter:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
-@layer utilities {
-  .swirl-decoration {
-    background: linear-gradient(
-      90deg,
-      #f87171,
-      #fb923c,
-      #facc15,
-      #4ade80,
-      #38bdf8,
-      #a78bfa
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+/* Custom styles for the party theme */
+body {
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Improved focus styles */
+*:focus-visible {
+  outline: 2px solid hsl(222.2 84% 4.9%);
+  outline-offset: 2px;
+}
+
+/* Typography improvements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(210 40% 96%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(215.4 16.3% 46.9% / 0.2);
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(215.4 16.3% 46.9% / 0.3);
+}
+
+/* Improved selection styles */
+::selection {
+  background: hsl(312 78% 58% / 0.2);
+  color: hsl(312 78% 58%);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Improved button animations */
+.btn-hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Glass morphism effect */
+.glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* Gradient backgrounds */
+.gradient-party {
+  background: linear-gradient(135deg, hsl(312 78% 58%), hsl(262 52% 47%));
+}
+
+.gradient-subtle {
+  background: linear-gradient(135deg, hsl(45 93% 88%), hsl(210 40% 96%));
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  font-family: "Inter", sans-serif;
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }

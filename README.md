@@ -12,6 +12,8 @@ A beautiful, responsive birthday party invitation website built for Tiferet Naga
 
 ## 📅 Event Details
 
+> **Note**: All event details are centralized in `src/config/eventConfig.ts` to maintain consistency across the application and prevent duplication.
+
 - **Who**: Tiferet Nagarpowers' Birthday Party
 - **When**: Sunday, August 10th, 2025 (2:00 PM - 5:00 PM)
 - **Where**: Cool Crafts of Long Island, 3443 Merrick Rd, Wantagh, NY 11793
@@ -27,7 +29,9 @@ A beautiful, responsive birthday party invitation website built for Tiferet Naga
 - **Forms**: React Hook Form + Zod validation
 - **Email Service**: EmailJS
 - **Calendar Integration**: calendar-link library
+- **Date/Time Handling**: date-fns with timezone support
 - **Icons**: Lucide React
+- **Architecture**: DRY principles with centralized configuration
 
 ## 🚀 Getting Started
 
@@ -39,18 +43,21 @@ A beautiful, responsive birthday party invitation website built for Tiferet Naga
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd birthday-party
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Set up environment variables:
-Create a `.env` file in the root directory with your EmailJS configuration:
+   Create a `.env` file in the root directory with your EmailJS configuration:
+
 ```env
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
 VITE_EMAILJS_SERVICE_ID=your_service_id
@@ -59,11 +66,38 @@ VITE_RECIPIENT_EMAIL=your_email@example.com
 ```
 
 4. Start the development server:
+
 ```bash
 pnpm dev
 ```
 
 5. Open [http://localhost:5173](http://localhost:5173) in your browser
+
+### 🔧 Customizing Event Details
+
+All event information is centralized in `src/config/eventConfig.ts` with smart date/time handling:
+
+**Date & Time Management:**
+
+- Single source of truth for all dates/times using `date-fns`
+- Automatic Eastern Time zone handling (no internationalization needed)
+- All date formats are computed from base dates, eliminating duplication
+- Change the event date/time in one place and it updates everywhere
+
+**To customize the event:**
+
+1. Open `src/config/eventConfig.ts`
+2. Update the base dates: `EVENT_START_DATE`, `EVENT_END_DATE`, `RSVP_DEADLINE_DATE`
+3. Update venue and contact information in the `EVENT_CONFIG` object
+4. All computed properties (readable dates, ISO formats, time ranges) automatically update
+
+**Date/Time Features:**
+
+- ✅ Single source of truth for all dates
+- ✅ Consistent formatting using `date-fns`
+- ✅ Eastern Time zone support
+- ✅ Computed properties (no duplicate strings)
+- ✅ Calendar API compatible ISO formats
 
 ## 📧 EmailJS Setup
 
@@ -90,8 +124,9 @@ This project is optimized for Netlify deployment with serverless functions. Simp
 ## 📱 Responsive Design
 
 The invitation is designed mobile-first with breakpoints for:
+
 - Mobile: 320px - 640px
-- Tablet: 640px - 1024px  
+- Tablet: 640px - 1024px
 - Desktop: 1024px+
 
 ## 🎯 Project Structure

@@ -1,19 +1,19 @@
-import { useState, useRef, useEffect } from 'react'
-import { Check, ChevronDown, X } from 'lucide-react'
-import { cn } from '../../lib/utils'
+import { useState, useRef, useEffect } from "react";
+import { Check, ChevronDown, X } from "lucide-react";
+import { cn } from "../../lib/utils";
 
 interface Option {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 interface MultiSelectProps {
-  options: Option[]
-  value: string[]
-  onChange: (value: string[]) => void
-  placeholder?: string
-  className?: string
-  error?: boolean
+  options: Option[];
+  value: string[];
+  onChange: (value: string[]) => void;
+  placeholder?: string;
+  className?: string;
+  error?: boolean;
 }
 
 export default function MultiSelect({
@@ -22,36 +22,39 @@ export default function MultiSelect({
   onChange,
   placeholder = "Select options...",
   className,
-  error = false
+  error = false,
 }: MultiSelectProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleToggleOption = (optionValue: string) => {
     const newValue = value.includes(optionValue)
-      ? value.filter(v => v !== optionValue)
-      : [...value, optionValue]
-    onChange(newValue)
-  }
+      ? value.filter((v) => v !== optionValue)
+      : [...value, optionValue];
+    onChange(newValue);
+  };
 
   const handleRemovePill = (optionValue: string) => {
-    onChange(value.filter(v => v !== optionValue))
-  }
+    onChange(value.filter((v) => v !== optionValue));
+  };
 
   const getSelectedLabels = () => {
-    return value.map(v => options.find(opt => opt.value === v)?.label || v)
-  }
+    return value.map((v) => options.find((opt) => opt.value === v)?.label || v);
+  };
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -89,7 +92,9 @@ export default function MultiSelect({
         <span className={value.length === 0 ? "text-slate-500" : ""}>
           {value.length === 0 ? placeholder : `${value.length} selected`}
         </span>
-        <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
+        <ChevronDown
+          className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")}
+        />
       </button>
 
       {/* Dropdown Content */}
@@ -103,13 +108,17 @@ export default function MultiSelect({
                 onClick={() => handleToggleOption(option.value)}
                 className="flex w-full items-center gap-2 rounded-sm px-2 py-2 text-sm hover:bg-slate-100"
               >
-                <div className={cn(
-                  "flex h-4 w-4 items-center justify-center rounded border",
-                  value.includes(option.value)
-                    ? "bg-purple-600 border-purple-600 text-white"
-                    : "border-slate-300"
-                )}>
-                  {value.includes(option.value) && <Check className="h-3 w-3" />}
+                <div
+                  className={cn(
+                    "flex h-4 w-4 items-center justify-center rounded border",
+                    value.includes(option.value)
+                      ? "bg-purple-600 border-purple-600 text-white"
+                      : "border-slate-300"
+                  )}
+                >
+                  {value.includes(option.value) && (
+                    <Check className="h-3 w-3" />
+                  )}
                 </div>
                 {option.label}
               </button>
@@ -118,5 +127,5 @@ export default function MultiSelect({
         </div>
       )}
     </div>
-  )
-} 
+  );
+}

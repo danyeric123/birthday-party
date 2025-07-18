@@ -1,97 +1,119 @@
-import { useState } from "react";
-import { CalendarDays, ChevronDown } from "lucide-react";
-import { google, outlook, office365, yahoo, ics } from "calendar-link";
-import { Button } from "./ui/button";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { EVENT_CONFIG } from "../config/eventConfig";
 import { cn } from "../lib/utils";
+import { useEffect } from "react";
 
 interface AddToCalendarProps {
-  event: {
-    title: string;
-    description: string;
-    start: string; // ISO date string
-    end: string; // ISO date string
-    location?: string;
-    url?: string;
-  };
   className?: string;
 }
 
-const calendarOptions = [
-  { name: "Google Calendar", icon: "📅", generator: google },
-  { name: "Outlook", icon: "📧", generator: outlook },
-  { name: "Office 365", icon: "🏢", generator: office365 },
-  { name: "Yahoo Calendar", icon: "📌", generator: yahoo },
-  { name: "Apple Calendar (.ics)", icon: "🍎", generator: ics },
-];
+export default function AddToCalendar({ className }: AddToCalendarProps) {
+  // Extract date and time parts from EVENT_CONFIG
+  const eventDate = EVENT_CONFIG.event.date.iso; // YYYY-MM-DD format
+  const startTime = EVENT_CONFIG.event.time.start.time24; // "15:00" format (24-hour)
+  const endTime = EVENT_CONFIG.event.time.end.time24; // "16:30" format (24-hour)
 
-export default function AddToCalendar({
-  event,
-  className,
-}: AddToCalendarProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  // Inject custom styles to match RSVP button theme
+  useEffect(() => {
+    const styleId = "atcb-custom-styles";
 
-  const handleCalendarClick = (generator: any) => {
-    try {
-      const calendarUrl = generator(event);
-
-      if (generator === ics) {
-        // For .ics files, create a blob and download
-        const element = document.createElement("a");
-        const file = new Blob([calendarUrl], { type: "text/calendar" });
-        element.href = URL.createObjectURL(file);
-        element.download = "birthday-party.ics";
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-      } else {
-        // For other calendars, open in new tab
-        window.open(calendarUrl, "_blank", "noopener,noreferrer");
-      }
-
-      setIsOpen(false);
-    } catch (error) {
-      console.error("Failed to add to calendar:", error);
+    // Remove existing styles if they exist
+    const existingStyle = document.getElementById(styleId);
+    if (existingStyle) {
+      existingStyle.remove();
     }
-  };
+
+    // Create new style element
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+      .atcb {
+        /* Match RSVP button styling */
+        background: white !important;
+        color: #db2777 !important; /* pink-600 */
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 0.5rem !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+        font-weight: 600 !important;
+        font-size: 1.125rem !important; /* text-lg */
+        padding: 0.75rem 2rem !important; /* py-3 px-8 */
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+        min-height: 48px !important;
+      }
+      
+      .atcb:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+      
+      .atcb-icon {
+        color: #db2777 !important; /* pink-600 */
+        margin-right: 0.5rem !important;
+      }
+      
+      .atcb-text {
+        color: #db2777 !important; /* pink-600 */
+      }
+      
+      /* Style the dropdown */
+      .atcb-list {
+        background: white !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 0.5rem !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+      }
+      
+      .atcb-list-item {
+        color: #374151 !important; /* gray-700 */
+        padding: 0.75rem 1rem !important;
+      }
+      
+      .atcb-list-item:hover {
+        background: #fdf2f8 !important; /* pink-50 */
+        color: #db2777 !important; /* pink-600 */
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    // Cleanup function
+    return () => {
+      const styleElement = document.getElementById(styleId);
+      if (styleElement) {
+        styleElement.remove();
+      }
+    };
+  }, []);
 
   return (
-    <div className={cn("relative inline-block", className)}>
-      <Button
-        onClick={() => setIsOpen(!isOpen)}
-        variant="outline"
-        size="sm"
-        className="gap-2 bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100 hover:border-purple-300"
-      >
-        <CalendarDays className="h-4 w-4" />
-        Add to Calendar
-        <ChevronDown
-          className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")}
-        />
-      </Button>
-
-      {isOpen && (
-        <>
-          {/* Overlay to close dropdown when clicking outside */}
-          <div
-            className="fixed inset-0 z-10"
-            onClick={() => setIsOpen(false)}
-          />
-
-          {/* Dropdown menu */}
-          <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1">
-            {calendarOptions.map((option) => (
-              <button
-                key={option.name}
-                onClick={() => handleCalendarClick(option.generator)}
-                className="w-full px-4 py-3 text-left text-sm hover:bg-gray-50 flex items-center gap-3 transition-colors"
-              >
-                <span className="text-lg">{option.icon}</span>
-                <span className="font-medium text-gray-700">{option.name}</span>
-              </button>
-            ))}
-          </div>
-        </>
-      )}
+    <div className={cn("inline-block", className)}>
+      <AddToCalendarButton
+        name={EVENT_CONFIG.calendar.title}
+        description={EVENT_CONFIG.calendar.description}
+        startDate={eventDate}
+        endDate={eventDate} // Same day event
+        startTime={startTime}
+        endTime={endTime}
+        timeZone={EVENT_CONFIG.event.timezone}
+        location={EVENT_CONFIG.calendar.location}
+        options={[
+          "Apple",
+          "Google",
+          "iCal",
+          "Microsoft365",
+          "Outlook.com",
+          "Yahoo",
+        ]}
+        buttonStyle="round"
+        lightMode="bodyScheme"
+        size="3"
+        listStyle="modal"
+        trigger="click"
+        hideIconButton={false}
+        hideTextLabelButton={false}
+        label="Add to Calendar"
+      />
     </div>
   );
 }
