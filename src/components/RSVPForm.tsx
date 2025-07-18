@@ -35,7 +35,7 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import MultiSelect from "./ui/multi-select";
+import DietaryAutocomplete from "./ui/dietary-autocomplete";
 
 const rsvpSchema = z.object({
   name: z
@@ -91,7 +91,6 @@ export default function RSVPForm() {
   });
 
   const attending = form.watch("attending");
-  const selectedDietary = form.watch("dietary");
 
   const onSubmit = async (data: RSVPFormData) => {
     setIsSubmitting(true);
@@ -396,35 +395,17 @@ export default function RSVPForm() {
                       <FormItem>
                         <FormLabel>Dietary Requirements or Allergies</FormLabel>
                         <FormControl>
-                          <MultiSelect
+                          <DietaryAutocomplete
                             options={DIETARY_OPTIONS}
                             value={field.value || []}
                             onChange={field.onChange}
-                            placeholder="Select any dietary requirements..."
-                            className="h-12"
+                            placeholder="Type to search dietary requirements..."
                           />
                         </FormControl>
                         <FormDescription>
-                          Select all that apply. This helps us prepare
-                          appropriate kosher food for everyone.
+                          Type to search and select dietary requirements. Try "gluten", "dairy", "nuts", etc. 
+                          This helps us prepare appropriate kosher food for everyone.
                         </FormDescription>
-                        {selectedDietary && selectedDietary.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mt-2">
-                            {selectedDietary.map((value) => {
-                              const option = DIETARY_OPTIONS.find(
-                                (opt) => opt.value === value
-                              );
-                              return option ? (
-                                <div
-                                  key={value}
-                                  className="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-800 rounded-full"
-                                >
-                                  {option.label}
-                                </div>
-                              ) : null;
-                            })}
-                          </div>
-                        )}
                         <FormMessage />
                       </FormItem>
                     )}
