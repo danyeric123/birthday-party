@@ -21,42 +21,45 @@ function smartSearch(query: string, options: Option[]): Option[] {
   if (!query.trim()) return options;
 
   const searchTerm = query.toLowerCase().trim();
-  
+
   // Common synonyms and variations people might type
   const synonyms: Record<string, string[]> = {
-    "gluten": ["gluten-free", "celiac", "wheat"],
-    "dairy": ["dairy-free", "lactose", "milk"],
-    "nuts": ["nut-allergy", "peanut-allergy", "tree nuts"],
-    "peanuts": ["peanut-allergy", "nuts"],
-    "egg": ["egg-allergy", "eggs"],
-    "soy": ["soy-allergy", "soya"],
-    "sugar": ["sugar-free", "diabetic", "diabetes"],
-    "dye": ["food-dye-sensitivity", "coloring", "artificial"],
-    "seeds": ["seed-allergy", "sesame", "sunflower"],
-    "celiac": ["gluten-free", "gluten"],
-    "lactose": ["dairy-free", "dairy", "milk"],
-    "diabetic": ["sugar-free", "diabetes", "sugar"],
+    gluten: ["gluten-free", "celiac", "wheat"],
+    dairy: ["dairy-free", "lactose", "milk"],
+    nuts: ["nut-allergy", "peanut-allergy", "tree nuts"],
+    peanuts: ["peanut-allergy", "nuts"],
+    egg: ["egg-allergy", "eggs"],
+    soy: ["soy-allergy", "soya"],
+    sugar: ["sugar-free", "diabetic", "diabetes"],
+    dye: ["food-dye-sensitivity", "coloring", "artificial"],
+    seeds: ["seed-allergy", "sesame", "sunflower"],
+    celiac: ["gluten-free", "gluten"],
+    lactose: ["dairy-free", "dairy", "milk"],
+    diabetic: ["sugar-free", "diabetes", "sugar"],
   };
 
-  return options.filter(option => {
+  return options.filter((option) => {
     const optionText = option.label.toLowerCase();
     const optionValue = option.value.toLowerCase();
-    
+
     // Direct substring match in label or value
     if (optionText.includes(searchTerm) || optionValue.includes(searchTerm)) {
       return true;
     }
-    
+
     // Check synonyms
     for (const [key, values] of Object.entries(synonyms)) {
       if (searchTerm.includes(key) || key.includes(searchTerm)) {
-        return values.some(synonym => optionText.includes(synonym) || optionValue.includes(synonym));
+        return values.some(
+          (synonym) =>
+            optionText.includes(synonym) || optionValue.includes(synonym)
+        );
       }
     }
-    
+
     // Fuzzy matching for typos (simple Levenshtein-like approach)
     const words = optionText.split(/\s+/);
-    return words.some(word => {
+    return words.some((word) => {
       if (word.length < 3) return false;
       const similarity = calculateSimilarity(searchTerm, word);
       return similarity > 0.6; // 60% similarity threshold
@@ -68,10 +71,12 @@ function smartSearch(query: string, options: Option[]): Option[] {
 function calculateSimilarity(str1: string, str2: string): number {
   const longer = str1.length > str2.length ? str1 : str2;
   const shorter = str1.length > str2.length ? str2 : str1;
-  
+
   if (longer.length === 0) return 1.0;
-  
-  const matches = shorter.split('').filter((char, i) => char === longer[i]).length;
+
+  const matches = shorter
+    .split("")
+    .filter((char, i) => char === longer[i]).length;
   return matches / longer.length;
 }
 
@@ -111,7 +116,7 @@ export default function DietaryAutocomplete({
       ? value.filter((v) => v !== optionValue)
       : [...value, optionValue];
     onChange(newValue);
-    
+
     // Clear search and close on mobile after selection
     if (window.innerWidth < 768) {
       setSearchQuery("");
@@ -142,13 +147,13 @@ export default function DietaryAutocomplete({
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setHighlightedIndex((prev) => 
+        setHighlightedIndex((prev) =>
           prev < filteredOptions.length - 1 ? prev + 1 : 0
         );
         break;
       case "ArrowUp":
         e.preventDefault();
-        setHighlightedIndex((prev) => 
+        setHighlightedIndex((prev) =>
           prev > 0 ? prev - 1 : filteredOptions.length - 1
         );
         break;
@@ -228,7 +233,9 @@ export default function DietaryAutocomplete({
             <div className="p-4 text-sm text-slate-500 text-center">
               No dietary requirements found.
               <br />
-              <span className="text-xs">Try "gluten", "dairy", "nuts", etc.</span>
+              <span className="text-xs">
+                Try "gluten", "dairy", "nuts", etc.
+              </span>
             </div>
           ) : (
             <div className="p-1">
@@ -266,4 +273,4 @@ export default function DietaryAutocomplete({
       )}
     </div>
   );
-} 
+}

@@ -403,8 +403,9 @@ export default function RSVPForm() {
                           />
                         </FormControl>
                         <FormDescription>
-                          Type to search and select dietary requirements. Try "gluten", "dairy", "nuts", etc. 
-                          This helps us prepare appropriate kosher food for everyone.
+                          Type to search and select dietary requirements. Try
+                          "gluten", "dairy", "nuts", etc. This helps us prepare
+                          appropriate kosher food for everyone.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
