@@ -139,9 +139,11 @@ export const EVENT_CONFIG = {
 
   // Activities and other details - based on Cool Crafts of Long Island offerings
   activities: [
-    "🎨 Plaster Craft Painting",
-    "🏦 Paint Banks & Mini Lockers",
-    "📋 Cork Board Decorating",
+    "🎨 Plaster Painting",
+    "🎮 Group Games",
+    "🕹️ Video Games",
+    "✨ Glitter Tattoos",
+    "💅 Nail Painting",
     "🎂 Birthday Celebration & Cake",
   ],
 
