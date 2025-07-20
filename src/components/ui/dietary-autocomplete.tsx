@@ -52,7 +52,7 @@ function smartSearch(query: string, options: Option[]): Option[] {
       if (searchTerm.includes(key) || key.includes(searchTerm)) {
         return values.some(
           (synonym) =>
-            optionText.includes(synonym) || optionValue.includes(synonym)
+            optionText.includes(synonym) || optionValue.includes(synonym),
         );
       }
     }
@@ -148,13 +148,13 @@ export default function DietaryAutocomplete({
       case "ArrowDown":
         e.preventDefault();
         setHighlightedIndex((prev) =>
-          prev < filteredOptions.length - 1 ? prev + 1 : 0
+          prev < filteredOptions.length - 1 ? prev + 1 : 0,
         );
         break;
       case "ArrowUp":
         e.preventDefault();
         setHighlightedIndex((prev) =>
-          prev > 0 ? prev - 1 : filteredOptions.length - 1
+          prev > 0 ? prev - 1 : filteredOptions.length - 1,
         );
         break;
       case "Enter":
@@ -212,7 +212,7 @@ export default function DietaryAutocomplete({
           className={cn(
             "flex h-12 w-full rounded-md border bg-white px-3 py-2 text-base ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
             error ? "border-red-500" : "border-slate-200",
-            className
+            className,
           )}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
@@ -221,7 +221,7 @@ export default function DietaryAutocomplete({
         <ChevronDown
           className={cn(
             "absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-500 transition-transform pointer-events-none",
-            isOpen && "rotate-180"
+            isOpen && "rotate-180",
           )}
         />
       </div>
@@ -247,7 +247,7 @@ export default function DietaryAutocomplete({
                   className={cn(
                     "flex w-full items-center gap-3 rounded-sm px-3 py-3 text-sm text-left hover:bg-slate-100 focus:bg-slate-100 focus:outline-none",
                     index === highlightedIndex && "bg-slate-100",
-                    "min-h-[44px]" // Touch-friendly minimum height
+                    "min-h-[44px]", // Touch-friendly minimum height
                   )}
                   role="option"
                   aria-selected={value.includes(option.value)}
@@ -257,7 +257,7 @@ export default function DietaryAutocomplete({
                       "flex h-5 w-5 items-center justify-center rounded border flex-shrink-0",
                       value.includes(option.value)
                         ? "bg-pink-600 border-pink-600 text-white"
-                        : "border-slate-300"
+                        : "border-slate-300",
                     )}
                   >
                     {value.includes(option.value) && (

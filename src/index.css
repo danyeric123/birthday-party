@@ -2,7 +2,9 @@
 
 /* Custom styles for the party theme */
 body {
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
 }
 
 /* Improved focus styles */
@@ -57,7 +59,9 @@ h6 {
 
 /* Improved button animations */
 .btn-hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn-hover-lift:hover {

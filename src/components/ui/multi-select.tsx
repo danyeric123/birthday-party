@@ -86,7 +86,7 @@ export default function MultiSelect({
         className={cn(
           "flex w-full items-center justify-between rounded-md border bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
           error ? "border-red-500" : "border-slate-200",
-          className
+          className,
         )}
       >
         <span className={value.length === 0 ? "text-slate-500" : ""}>
@@ -113,7 +113,7 @@ export default function MultiSelect({
                     "flex h-4 w-4 items-center justify-center rounded border",
                     value.includes(option.value)
                       ? "bg-purple-600 border-purple-600 text-white"
-                      : "border-slate-300"
+                      : "border-slate-300",
                   )}
                 >
                   {value.includes(option.value) && (

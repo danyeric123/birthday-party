@@ -105,7 +105,7 @@ export default function RSVPForm() {
 
       if (!publicKey || !serviceId || !templateId || !recipientEmail) {
         throw new Error(
-          "EmailJS environment variables not configured. Please check your .env file."
+          "EmailJS environment variables not configured. Please check your .env file.",
         );
       }
 
@@ -124,7 +124,7 @@ export default function RSVPForm() {
             ? data.dietary
                 .map(
                   (d) =>
-                    DIETARY_OPTIONS.find((opt) => opt.value === d)?.label || d
+                    DIETARY_OPTIONS.find((opt) => opt.value === d)?.label || d,
                 )
                 .join(", ")
             : "None specified",
@@ -140,7 +140,7 @@ export default function RSVPForm() {
         serviceId,
         templateId,
         emailData,
-        publicKey
+        publicKey,
       );
 
       if (result.status === 200) {
@@ -160,7 +160,7 @@ export default function RSVPForm() {
       setSubmitError(
         error instanceof Error
           ? error.message
-          : "Failed to send RSVP. Please try again."
+          : "Failed to send RSVP. Please try again.",
       );
     } finally {
       setIsSubmitting(false);
@@ -212,8 +212,8 @@ export default function RSVPForm() {
             {isSubmitted
               ? "Your RSVP has been sent successfully! We're so excited to celebrate with you. Keep an eye out for any updates about the party details."
               : submitError
-              ? "We had trouble sending your RSVP. Please check your internet connection and try again, or contact us directly if the problem persists."
-              : "Please let us know if you can join us for Tiferet's special birthday celebration! Your response helps us plan the perfect party for everyone."}
+                ? "We had trouble sending your RSVP. Please check your internet connection and try again, or contact us directly if the problem persists."
+                : "Please let us know if you can join us for Tiferet's special birthday celebration! Your response helps us plan the perfect party for everyone."}
           </DialogDescription>
         </DialogHeader>
 
