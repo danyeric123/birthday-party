@@ -105,7 +105,7 @@ export default function RSVPForm() {
 
       if (!publicKey || !serviceId || !templateId || !recipientEmail) {
         throw new Error(
-          "EmailJS environment variables not configured. Please check your .env file.",
+          "EmailJS environment variables not configured. Please check your .env file."
         );
       }
 
@@ -124,7 +124,7 @@ export default function RSVPForm() {
             ? data.dietary
                 .map(
                   (d) =>
-                    DIETARY_OPTIONS.find((opt) => opt.value === d)?.label || d,
+                    DIETARY_OPTIONS.find((opt) => opt.value === d)?.label || d
                 )
                 .join(", ")
             : "None specified",
@@ -140,7 +140,7 @@ export default function RSVPForm() {
         serviceId,
         templateId,
         emailData,
-        publicKey,
+        publicKey
       );
 
       if (result.status === 200) {
@@ -160,7 +160,7 @@ export default function RSVPForm() {
       setSubmitError(
         error instanceof Error
           ? error.message
-          : "Failed to send RSVP. Please try again.",
+          : "Failed to send RSVP. Please try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -181,30 +181,40 @@ export default function RSVPForm() {
       <DialogTrigger asChild>
         <Button
           size="lg"
-          className="bg-white text-pink-600 hover:bg-white/90 shadow-lg btn-hover-lift border-2 border-white/20 font-semibold px-8 py-3 text-lg"
+          className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white hover:from-pink-600 hover:via-purple-600 hover:to-cyan-600 shadow-xl btn-hover-lift border-0 font-bold px-10 py-4 text-lg rounded-full magical-glow focus-magical"
         >
+          <span className="mr-3 text-xl">🦄</span>
           <Mail className="mr-2 h-5 w-5" />
           RSVP Now
+          <span className="ml-3 text-xl">✨</span>
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-md w-[95vw] max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="text-center space-y-3">
-          <DialogTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2">
+      <DialogContent className="sm:max-w-md w-[95vw] max-h-[90vh] overflow-y-auto gradient-magical-card border-2 border-pink-200">
+        <DialogHeader className="text-center space-y-4">
+          <div className="flex justify-center items-center gap-2 text-3xl mb-2">
+            <span className="animate-bounce">🦄</span>
+            <span className="animate-bounce delay-200">🌈</span>
+            <span className="animate-bounce delay-400">✨</span>
+          </div>
+          <DialogTitle className="text-2xl font-bold rainbow-text flex items-center justify-center gap-2">
             {isSubmitted ? (
               <>
                 <CheckCircle className="h-6 w-6 text-green-500" />
-                Thank You!
+                <span className="text-green-600">Thank You!</span>
+                <span className="text-2xl">🎉</span>
               </>
             ) : submitError ? (
               <>
                 <AlertCircle className="h-6 w-6 text-red-500" />
-                Oops! Something went wrong
+                <span className="text-red-600">Oops! Something went wrong</span>
+                <span className="text-2xl">😔</span>
               </>
             ) : (
               <>
                 <PartyPopper className="h-6 w-6 text-pink-600" />
-                RSVP to Tiferet's Party
+                RSVP to Tiferet's Magical Party
+                <span className="text-2xl">🎂</span>
               </>
             )}
           </DialogTitle>
@@ -212,8 +222,8 @@ export default function RSVPForm() {
             {isSubmitted
               ? "Your RSVP has been sent successfully! We're so excited to celebrate with you. Keep an eye out for any updates about the party details."
               : submitError
-                ? "We had trouble sending your RSVP. Please check your internet connection and try again, or contact us directly if the problem persists."
-                : "Please let us know if you can join us for Tiferet's special birthday celebration! Your response helps us plan the perfect party for everyone."}
+              ? "We had trouble sending your RSVP. Please check your internet connection and try again, or contact us directly if the problem persists."
+              : "Please let us know if you can join us for Tiferet's special birthday celebration! Your response helps us plan the perfect party for everyone."}
           </DialogDescription>
         </DialogHeader>
 
@@ -227,13 +237,21 @@ export default function RSVPForm() {
 
         {isSubmitted ? (
           <div className="flex flex-col items-center py-8 space-y-6">
-            <div className="relative">
+            <div className="relative animate-bounce-magical">
               <CheckCircle className="h-20 w-20 text-green-500 animate-pulse" />
-              <PartyPopper className="h-8 w-8 text-pink-600 absolute -top-2 -right-2" />
+              <PartyPopper className="h-8 w-8 text-pink-600 absolute -top-2 -right-2 animate-bounce" />
+              <span className="text-4xl absolute -bottom-2 -left-2 animate-pulse">
+                🦄
+              </span>
             </div>
-            <div className="text-center space-y-3">
-              <p className="text-xl font-bold text-gray-900">
-                RSVP Received! 🎉
+            <div className="text-center space-y-4">
+              <div className="flex justify-center items-center gap-2 text-2xl">
+                <span className="animate-bounce">🎉</span>
+                <span className="animate-bounce delay-200">✨</span>
+                <span className="animate-bounce delay-400">🌈</span>
+              </div>
+              <p className="text-xl font-bold rainbow-text">
+                RSVP Received! Magical!
               </p>
               <p className="text-gray-600 max-w-sm leading-relaxed">
                 Thank you for responding! We're thrilled you can celebrate with
@@ -241,9 +259,17 @@ export default function RSVPForm() {
                 the party details.
               </p>
             </div>
-            <div className="bg-pink-50 p-4 rounded-lg border border-pink-200 text-center">
-              <p className="text-sm text-pink-700 font-medium">
-                🎂 Can't wait to party with you! 🎂
+            <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-cyan-50 p-6 rounded-2xl border-2 border-pink-200 text-center magical-glow">
+              <div className="flex justify-center items-center gap-2 text-3xl mb-2">
+                <span className="animate-pulse">🦄</span>
+                <span className="animate-pulse delay-300">💖</span>
+                <span className="animate-pulse delay-600">🧚‍♀️</span>
+              </div>
+              <p className="text-sm text-pink-700 font-bold">
+                Can't wait to party with you!
+              </p>
+              <p className="text-xs text-purple-600 mt-1">
+                It's going to be absolutely magical! ✨
               </p>
             </div>
           </div>

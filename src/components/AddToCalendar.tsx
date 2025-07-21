@@ -39,6 +39,9 @@ export default function AddToCalendar({ className }: AddToCalendarProps) {
         padding: 0.75rem 2rem !important; /* py-3 px-8 */
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         min-height: 48px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        white-space: nowrap !important;
       }
       
       .atcb:hover {
