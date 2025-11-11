@@ -1,68 +1,96 @@
-import { Calendar, Clock, MapPin, Palette, Car } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  Palette,
+  Car,
+} from "lucide-react";
 import AddToCalendar from "./AddToCalendar";
 import RSVPForm from "./RSVPForm";
 import { EVENT_CONFIG } from "../config/eventConfig";
 
 export default function InvitationContent() {
   return (
-    <main className="px-6 py-8 bg-amber-50 space-y-8">
-      {/* Hero Section */}
+    <main className="px-6 py-8 gradient-soft-magic space-y-8">
+      {/* Hero Section with magical enhancement */}
       <div className="text-center space-y-6">
-        <p className="text-lg text-gray-700">
-          Join us for a fun-filled celebration for
-        </p>
-        <h3 className="font-display text-5xl lg:text-6xl text-purple-600 leading-tight">
+        <div className="flex justify-center items-center gap-2 mb-4">
+          <span className="text-3xl animate-bounce">🌟</span>
+          <p className="text-lg text-gray-700 font-medium">
+            Join us for a magical celebration for
+          </p>
+          <span className="text-3xl animate-bounce delay-300">🌟</span>
+        </div>
+        <h3 className="font-display text-5xl lg:text-6xl rainbow-text leading-tight animate-float-gentle">
           {EVENT_CONFIG.guest.name}!
         </h3>
+        <div className="flex justify-center items-center gap-2 text-2xl">
+          <span className="animate-pulse">🦄</span>
+          <span className="animate-pulse delay-200">🌈</span>
+          <span className="animate-pulse delay-400">💖</span>
+          <span className="animate-pulse delay-600">✨</span>
+        </div>
       </div>
 
-      {/* Event Details Cards */}
+      {/* Enhanced Event Details Cards with rainbow theme */}
       <div className="grid gap-6 max-w-lg mx-auto">
-        {/* Date Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-purple-400">
+        {/* Date Card - Pink Rainbow */}
+        <div className="card-magical bg-gradient-to-br from-pink-50 to-rose-100 rounded-2xl shadow-lg p-6 border-l-4 border-pink-400 magical-glow">
           <div className="text-center space-y-3">
             <div className="flex justify-center">
-              <div className="bg-purple-100 p-3 rounded-lg">
-                <Calendar className="h-6 w-6 text-purple-600" />
+              <div className="bg-gradient-to-br from-pink-100 to-rose-200 p-4 rounded-2xl shadow-inner">
+                <Calendar className="h-6 w-6 text-pink-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-bold text-gray-800 text-lg">Date</h4>
-              <p className="text-pink-600 font-medium">
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <span className="text-lg">🗓️</span>
+                <h4 className="font-bold text-gray-800 text-lg">Date</h4>
+                <span className="text-lg">🗓️</span>
+              </div>
+              <p className="text-pink-600 font-bold text-lg">
                 {EVENT_CONFIG.event.date.readable}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Time Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-cyan-400">
+        {/* Time Card - Purple Rainbow */}
+        <div className="card-magical bg-gradient-to-br from-purple-50 to-violet-100 rounded-2xl shadow-lg p-6 border-l-4 border-purple-400 magical-glow">
           <div className="text-center space-y-3">
             <div className="flex justify-center">
-              <div className="bg-cyan-100 p-3 rounded-lg">
-                <Clock className="h-6 w-6 text-cyan-600" />
+              <div className="bg-gradient-to-br from-purple-100 to-violet-200 p-4 rounded-2xl shadow-inner">
+                <Clock className="h-6 w-6 text-purple-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-bold text-gray-800 text-lg">Time</h4>
-              <p className="text-purple-600 font-medium">
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <span className="text-lg">⏰</span>
+                <h4 className="font-bold text-gray-800 text-lg">Time</h4>
+                <span className="text-lg">⏰</span>
+              </div>
+              <p className="text-purple-600 font-bold text-lg">
                 {EVENT_CONFIG.event.time.duration}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Location Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-400">
+        {/* Location Card - Cyan Rainbow */}
+        <div className="card-magical bg-gradient-to-br from-cyan-50 to-blue-100 rounded-2xl shadow-lg p-6 border-l-4 border-cyan-400 magical-glow">
           <div className="text-center space-y-3">
             <div className="flex justify-center">
-              <div className="bg-green-100 p-3 rounded-lg">
-                <MapPin className="h-6 w-6 text-green-600" />
+              <div className="bg-gradient-to-br from-cyan-100 to-blue-200 p-4 rounded-2xl shadow-inner">
+                <MapPin className="h-6 w-6 text-cyan-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-bold text-gray-800 text-lg">Location</h4>
-              <p className="text-cyan-600 font-medium">
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <span className="text-lg">📍</span>
+                <h4 className="font-bold text-gray-800 text-lg">Location</h4>
+                <span className="text-lg">🏠</span>
+              </div>
+              <p className="text-cyan-600 font-bold text-lg">
                 {EVENT_CONFIG.venue.name}
               </p>
               <p className="text-sm text-gray-600 mt-1">
@@ -72,29 +100,35 @@ export default function InvitationContent() {
                 href={EVENT_CONFIG.venue.location.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                className="inline-flex items-center mt-3 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-medium rounded-full hover:from-blue-600 hover:to-cyan-600 transition-all btn-hover-lift focus-magical"
               >
-                📍 View on Google Maps
+                🗺️ View on Google Maps
               </a>
             </div>
           </div>
         </div>
 
-        {/* Activities Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-400">
+        {/* Activities Card - Rainbow Gradient */}
+        <div className="card-magical bg-gradient-to-br from-yellow-50 via-green-50 to-emerald-100 rounded-2xl shadow-lg p-6 border-l-4 border-yellow-400 magical-glow">
           <div className="text-center space-y-3">
             <div className="flex justify-center">
-              <div className="bg-yellow-100 p-3 rounded-lg">
+              <div className="bg-gradient-to-br from-yellow-100 to-emerald-200 p-4 rounded-2xl shadow-inner">
                 <Palette className="h-6 w-6 text-yellow-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-bold text-gray-800 text-lg">Activities</h4>
-              <div className="grid grid-cols-2 gap-2 mt-2">
+              <div className="flex justify-center items-center gap-2 mb-3">
+                <span className="text-lg">🎨</span>
+                <h4 className="font-bold text-gray-800 text-lg">
+                  Magical Activities
+                </h4>
+                <span className="text-lg">✨</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3 mt-3">
                 {EVENT_CONFIG.activities.map((activity, index) => (
                   <div
                     key={index}
-                    className="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-lg text-center"
+                    className="text-sm text-gray-700 bg-gradient-to-r from-white to-gray-50 px-3 py-3 rounded-xl text-center shadow-inner border font-medium hover:scale-105 transition-transform"
                   >
                     {activity}
                   </div>
@@ -104,17 +138,21 @@ export default function InvitationContent() {
           </div>
         </div>
 
-        {/* Parking Info */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
+        {/* Parking Info - Enhanced with magical styling */}
+        <div className="card-magical bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-indigo-200 magical-glow">
           <div className="text-center space-y-3">
             <div className="flex justify-center">
-              <div className="bg-blue-100 p-3 rounded-lg">
-                <Car className="h-6 w-6 text-blue-600" />
+              <div className="bg-gradient-to-br from-indigo-100 to-purple-200 p-4 rounded-2xl shadow-inner">
+                <Car className="h-6 w-6 text-indigo-600" />
               </div>
             </div>
             <div>
-              <h4 className="font-bold text-gray-800 text-lg">Parking</h4>
-              <p className="text-sm text-gray-600 mt-1">
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <span className="text-lg">🚗</span>
+                <h4 className="font-bold text-gray-800 text-lg">Parking</h4>
+                <span className="text-lg">🅿️</span>
+              </div>
+              <p className="text-sm text-gray-600 mt-1 font-medium">
                 {EVENT_CONFIG.venue.parking}
               </p>
             </div>
@@ -122,25 +160,25 @@ export default function InvitationContent() {
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto px-6">
+      {/* Enhanced Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-lg mx-auto px-6">
         <RSVPForm />
-        <AddToCalendar />
+        <AddToCalendar className="w-auto" />
       </div>
 
       {/* Party Closing Message */}
-      <div className="text-center bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 rounded-xl shadow-md p-6 max-w-md mx-auto border-2 border-purple-200">
+      <div className="text-center bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl shadow-md p-6 max-w-md mx-auto border border-pink-200">
         <div className="space-y-3">
-          <div className="text-4xl">🦄✨🎂</div>
-          <h4 className="font-bold text-purple-800 text-lg">
+          <div className="text-4xl">🎉✨🎂</div>
+          <h4 className="font-bold text-gray-800 text-lg">
             Can't Wait to Celebrate!
           </h4>
           <p className="text-gray-600 leading-relaxed">
             We're so excited to party with Rivkah and can't wait to see all her
-            friends there! It's going to be a magical unicorn-themed day full of
-            nail painting, face painting, movies, snuggles, and birthday cake!
+            friends there! It's going to be an amazing day full of unicorn magic,
+            nail painting, face painting, and birthday fun!
           </p>
-          <div className="text-2xl">🦄✨🎁</div>
+          <div className="text-2xl">🎨🌟🎁</div>
         </div>
       </div>
     </main>
