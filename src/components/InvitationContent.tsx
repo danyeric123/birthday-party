@@ -129,18 +129,18 @@ export default function InvitationContent() {
       </div>
 
       {/* Party Closing Message */}
-      <div className="text-center bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl shadow-md p-6 max-w-md mx-auto border border-pink-200">
+      <div className="text-center bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 rounded-xl shadow-md p-6 max-w-md mx-auto border-2 border-purple-200">
         <div className="space-y-3">
-          <div className="text-4xl">🎉✨🎂</div>
-          <h4 className="font-bold text-gray-800 text-lg">
+          <div className="text-4xl">🦄✨🎂</div>
+          <h4 className="font-bold text-purple-800 text-lg">
             Can't Wait to Celebrate!
           </h4>
           <p className="text-gray-600 leading-relaxed">
-            We're so excited to party with Tiferet and can't wait to see all her
-            friends there! It's going to be an amazing day full of crafts, cake,
-            and birthday fun!
+            We're so excited to party with Rivkah and can't wait to see all her
+            friends there! It's going to be a magical unicorn-themed day full of
+            nail painting, face painting, movies, snuggles, and birthday cake!
           </p>
-          <div className="text-2xl">🎨🌟🎁</div>
+          <div className="text-2xl">🦄✨🎁</div>
         </div>
       </div>
     </main>

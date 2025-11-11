@@ -204,7 +204,7 @@ export default function RSVPForm() {
             ) : (
               <>
                 <PartyPopper className="h-6 w-6 text-pink-600" />
-                RSVP to Tiferet's Party
+                RSVP to Rivkah's Unicorn Party
               </>
             )}
           </DialogTitle>
@@ -213,7 +213,7 @@ export default function RSVPForm() {
               ? "Your RSVP has been sent successfully! We're so excited to celebrate with you. Keep an eye out for any updates about the party details."
               : submitError
                 ? "We had trouble sending your RSVP. Please check your internet connection and try again, or contact us directly if the problem persists."
-                : "Please let us know if you can join us for Tiferet's special birthday celebration! Your response helps us plan the perfect party for everyone."}
+                : "Please let us know if you can join us for Rivkah's magical unicorn birthday celebration! Your response helps us plan the perfect party for everyone."}
           </DialogDescription>
         </DialogHeader>
 
@@ -237,8 +237,8 @@ export default function RSVPForm() {
               </p>
               <p className="text-gray-600 max-w-sm leading-relaxed">
                 Thank you for responding! We're thrilled you can celebrate with
-                Tiferet. You'll receive a confirmation email shortly with all
-                the party details.
+                Rivkah. You'll receive a confirmation email shortly with all the
+                party details.
               </p>
             </div>
             <div className="bg-pink-50 p-4 rounded-lg border border-pink-200 text-center">
@@ -422,7 +422,7 @@ export default function RSVPForm() {
                   <FormItem>
                     <FormLabel className="flex items-center gap-2">
                       <MessageSquare className="h-4 w-4" />
-                      Message for Tiferet (optional)
+                      Message for Rivkah (optional)
                     </FormLabel>
                     <FormControl>
                       <Textarea

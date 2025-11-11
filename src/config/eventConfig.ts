@@ -5,15 +5,15 @@ import { fromZonedTime, format as formatTz } from "date-fns-tz";
 const TIMEZONE = "America/New_York";
 
 // Single source of truth for event timing
-const EVENT_START_DATE = new Date("2025-08-10T15:00:00"); // 3:00 PM in local time
-const EVENT_END_DATE = new Date("2025-08-10T16:30:00"); // 4:30 PM in local time
+const EVENT_START_DATE = new Date("2025-11-23T15:00:00"); // 3:00 PM in local time
+const EVENT_END_DATE = new Date("2025-11-23T17:00:00"); // 5:00 PM in local time
 
 // Convert to Eastern Time (handles DST automatically)
 const EVENT_START_ET = fromZonedTime(EVENT_START_DATE, TIMEZONE);
 const EVENT_END_ET = fromZonedTime(EVENT_END_DATE, TIMEZONE);
 
 // RSVP deadline
-const RSVP_DEADLINE_DATE = new Date("2025-08-03T23:59:59");
+const RSVP_DEADLINE_DATE = new Date("2025-11-20T23:59:59");
 const RSVP_DEADLINE_ET = fromZonedTime(RSVP_DEADLINE_DATE, TIMEZONE);
 
 // Date formatting utility functions
@@ -55,14 +55,15 @@ const formatEventDate = {
 export const EVENT_CONFIG = {
   // Guest of honor
   guest: {
-    name: "Tiferet Nagarpowers",
-    firstName: "Tiferet",
+    name: "Rivkah Nagarpowers",
+    firstName: "Rivkah",
   },
 
   // Event details - all computed from single source of truth
   event: {
-    title: "Tiferet Nagarpowers' Birthday Party",
-    fullTitle: "Tiferet Nagarpowers' Birthday Party at Cool Crafts",
+    title: "Rivkah Nagarpowers' Birthday Party",
+    fullTitle:
+      "Rivkah Nagarpowers' Unicorn Birthday Party with Nail Painting, Face Painting, Movie & Snuggles",
     timezone: TIMEZONE,
 
     // All date/time properties are computed
@@ -90,40 +91,39 @@ export const EVENT_CONFIG = {
           time24: formatEventDate.endTime24(),
         },
         duration: formatEventDate.timeRange(),
-        durationHours: 3, // Static since it's always 3 hours
+        durationHours: 2, // Static since it's always 2 hours
       };
     },
 
     description:
-      "Join us for a fun-filled birthday celebration for Tiferet Nagarpowers! Kids will enjoy plaster craft painting, decorating banks & cork boards, and birthday fun at Cool Crafts of Long Island.",
+      "Join us for a magical unicorn-themed birthday celebration for Rivkah Nagarpowers! We'll have nail painting, face painting, a fun movie, and lots of snuggles at our home.",
   },
 
   // Venue information
   venue: {
-    name: "Cool Crafts of Long Island",
-    shortName: "Cool Crafts",
-    businessName: "COOL CRAFTS of Long Island, Inc.",
+    name: "Our Home",
+    shortName: "Our Home",
+    businessName: "",
     address: {
-      street: "3443 Merrick Rd",
-      city: "Wantagh",
+      street: "1086 Lynn Pl",
+      city: "Woodmere",
       state: "NY",
-      zip: "11793",
-      full: "3443 Merrick Rd, Wantagh, NY 11793",
+      zip: "11598",
+      full: "1086 Lynn Pl, Woodmere, NY 11598",
     },
     contact: {
-      phone: "(516) 735-2007",
-      phoneRaw: "15167352007",
-      phoneLink: "tel:+15167352007",
-      website: "www.coolcraftslongisland.com",
-      websiteUrl: "https://www.coolcraftslongisland.com",
+      phone: "",
+      phoneRaw: "",
+      phoneLink: "",
+      website: "",
+      websiteUrl: "",
     },
     location: {
       googleMapsUrl:
-        "https://maps.google.com/?q=3443+Merrick+Rd,+Wantagh,+NY+11793",
-      fullAddress:
-        "Cool Crafts of Long Island, 3443 Merrick Rd, Wantagh, NY 11793",
+        "https://maps.google.com/?q=1086+Lynn+Pl,+Woodmere,+NY+11598",
+      fullAddress: "1086 Lynn Pl, Woodmere, NY 11598",
     },
-    parking: "Parking available in the front and rear of building",
+    parking: "Street parking available",
   },
 
   // RSVP details - computed deadline
@@ -137,24 +137,23 @@ export const EVENT_CONFIG = {
     };
   },
 
-  // Activities and other details - based on Cool Crafts of Long Island offerings
+  // Activities and other details - unicorn-themed party at home
   activities: [
-    "🎨 Plaster Painting",
-    "🎮 Group Games",
-    "🕹️ Video Games",
-    "✨ Glitter Tattoos",
+    "🦄 Unicorn Magic",
     "💅 Nail Painting",
-    "🎂 Birthday Celebration & Cake",
+    "🎨 Face Painting",
+    "🎬 Movie Time",
+    "🤗 Snuggles & Fun",
+    "🎂 Birthday Cake",
   ],
 
   // Calendar event data - computed from base dates
   get calendar() {
     return {
-      title: "Tiferet Nagarpowers' Birthday Party at Cool Crafts",
+      title: "Rivkah Nagarpowers' Unicorn Birthday Party",
       description:
-        "Join us for a fun-filled birthday celebration for Tiferet Nagarpowers! Kids will enjoy plaster craft painting, decorating banks & cork boards, and birthday fun at Cool Crafts of Long Island. Address: 3443 Merrick Rd, Wantagh, NY 11793. Parking available in front and rear of building.",
-      location:
-        "Cool Crafts of Long Island, 3443 Merrick Rd, Wantagh, NY 11793",
+        "Join us for a magical unicorn-themed birthday celebration for Rivkah Nagarpowers! We'll have nail painting, face painting, a fun movie, and lots of snuggles. Address: 1086 Lynn Pl, Woodmere, NY 11598. Street parking available.",
+      location: "1086 Lynn Pl, Woodmere, NY 11598",
       startISO: formatEventDate.startISO(),
       endISO: formatEventDate.endISO(),
     };
@@ -163,8 +162,8 @@ export const EVENT_CONFIG = {
   // Email template data
   get email() {
     return {
-      subject: "RSVP: Birthday Party for Tiferet Nagarpowers",
-      eventName: "Tiferet Nagarpowers' Birthday Party",
+      subject: "RSVP: Unicorn Birthday Party for Rivkah Nagarpowers",
+      eventName: "Rivkah Nagarpowers' Unicorn Birthday Party",
     };
   },
 } as const;

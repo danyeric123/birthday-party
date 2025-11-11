@@ -12,14 +12,14 @@ export default function InvitationHeader() {
 
       {/* Content */}
       <div className="relative z-10 space-y-6">
-        {/* Decorative icons */}
+        {/* Decorative icons - Unicorn theme */}
         <div className="flex justify-center items-center gap-2 text-4xl mb-4">
-          <span className="animate-bounce">🎨</span>
+          <span className="animate-bounce">🦄</span>
           <Sparkles className="h-8 w-8 text-white/80 animate-pulse" />
           <span className="animate-bounce delay-100">✨</span>
           <Sparkles className="h-6 w-6 text-white/60 animate-pulse delay-500" />
-          <span className="animate-bounce delay-200">🌀</span>
-          <span className="animate-bounce delay-300">⭐</span>
+          <span className="animate-bounce delay-200">💅</span>
+          <span className="animate-bounce delay-300">🎨</span>
           <span className="animate-bounce delay-400">🎉</span>
         </div>
 
@@ -28,11 +28,11 @@ export default function InvitationHeader() {
           <h1 className="font-display text-4xl lg:text-5xl text-pink-400 tracking-wider leading-tight">
             You're Invited to a Party
           </h1>
-          <h2 className="text-2xl font-display text-cyan-300">
+          <h2 className="text-2xl font-display text-purple-300">
             at {EVENT_CONFIG.venue.shortName}!
           </h2>
           <p className="text-gray-300 text-sm">
-            {EVENT_CONFIG.venue.contact.website}
+            A Magical Unicorn Celebration 🦄✨
           </p>
         </div>
 
