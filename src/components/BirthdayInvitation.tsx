@@ -49,7 +49,15 @@ export default function BirthdayInvitation() {
 
         {/* Magical floating action hint with unicorn */}
         <div className="text-center mt-8 animate-bounce-magical">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/30">
+          <button
+            type="button"
+            onClick={() =>
+              document
+                .getElementById("rsvp")
+                ?.scrollIntoView({ behavior: "smooth", block: "center" })
+            }
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/30 cursor-pointer hover:bg-white transition-colors"
+          >
             <span
               className="text-2xl animate-bounce"
               style={{ animationDelay: "0.5s" }}
@@ -65,7 +73,7 @@ export default function BirthdayInvitation() {
             >
               ✨
             </span>
-          </div>
+          </button>
         </div>
       </div>
     </div>

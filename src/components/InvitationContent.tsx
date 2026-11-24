@@ -161,7 +161,10 @@ export default function InvitationContent() {
       </div>
 
       {/* Enhanced Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-lg mx-auto px-6">
+      <div
+        id="rsvp"
+        className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-lg mx-auto px-6 scroll-mt-24"
+      >
         <RSVPForm />
         <AddToCalendar className="w-auto" />
       </div>
