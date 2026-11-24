@@ -5,15 +5,15 @@ import { fromZonedTime, format as formatTz } from "date-fns-tz";
 const TIMEZONE = "America/New_York";
 
 // Single source of truth for event timing
-const EVENT_START_DATE = new Date("2025-11-23T15:00:00"); // 3:00 PM in local time
-const EVENT_END_DATE = new Date("2025-11-23T17:00:00"); // 5:00 PM in local time
+const EVENT_START_DATE = new Date("2026-11-29T14:30:00"); // 2:30 PM in local time
+const EVENT_END_DATE = new Date("2026-11-29T16:00:00"); // 4:00 PM in local time
 
 // Convert to Eastern Time (handles DST automatically)
 const EVENT_START_ET = fromZonedTime(EVENT_START_DATE, TIMEZONE);
 const EVENT_END_ET = fromZonedTime(EVENT_END_DATE, TIMEZONE);
 
 // RSVP deadline
-const RSVP_DEADLINE_DATE = new Date("2025-11-20T23:59:59");
+const RSVP_DEADLINE_DATE = new Date("2026-11-27T23:59:59");
 const RSVP_DEADLINE_ET = fromZonedTime(RSVP_DEADLINE_DATE, TIMEZONE);
 
 // Date formatting utility functions
@@ -91,7 +91,7 @@ export const EVENT_CONFIG = {
           time24: formatEventDate.endTime24(),
         },
         duration: formatEventDate.timeRange(),
-        durationHours: 2, // Static since it's always 2 hours
+        durationHours: 1.5, // Static since it's always 1.5 hours
       };
     },
 
@@ -105,11 +105,11 @@ export const EVENT_CONFIG = {
     shortName: "Our Home",
     businessName: "",
     address: {
-      street: "1086 Lynn Pl",
+      street: "1086 Lynn Pl Apt 6",
       city: "Woodmere",
       state: "NY",
       zip: "11598",
-      full: "1086 Lynn Pl, Woodmere, NY 11598",
+      full: "1086 Lynn Pl Apt 6, Woodmere, NY 11598",
     },
     contact: {
       phone: "",
@@ -120,8 +120,8 @@ export const EVENT_CONFIG = {
     },
     location: {
       googleMapsUrl:
-        "https://maps.google.com/?q=1086+Lynn+Pl,+Woodmere,+NY+11598",
-      fullAddress: "1086 Lynn Pl, Woodmere, NY 11598",
+        "https://maps.google.com/?q=1086+Lynn+Pl+Apt+6,+Woodmere,+NY+11598",
+      fullAddress: "1086 Lynn Pl Apt 6, Woodmere, NY 11598",
     },
     parking: "Street parking available",
   },
@@ -152,8 +152,8 @@ export const EVENT_CONFIG = {
     return {
       title: "Rivkah Nagarpowers' Unicorn Birthday Party",
       description:
-        "Join us for a magical unicorn-themed birthday celebration for Rivkah Nagarpowers! We'll have nail painting, face painting, a fun movie, and lots of snuggles. Address: 1086 Lynn Pl, Woodmere, NY 11598. Street parking available.",
-      location: "1086 Lynn Pl, Woodmere, NY 11598",
+        "Join us for a magical unicorn-themed birthday celebration for Rivkah Nagarpowers! We'll have nail painting, face painting, a fun movie, and lots of snuggles. Address: 1086 Lynn Pl Apt 6, Woodmere, NY 11598. Street parking available.",
+      location: "1086 Lynn Pl Apt 6, Woodmere, NY 11598",
       startISO: formatEventDate.startISO(),
       endISO: formatEventDate.endISO(),
     };
