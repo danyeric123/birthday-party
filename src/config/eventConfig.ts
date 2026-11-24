@@ -49,6 +49,10 @@ const formatEventDate = {
   rsvpDeadlineISO: () => formatISO(RSVP_DEADLINE_ET),
   rsvpDeadline: () =>
     formatTz(RSVP_DEADLINE_ET, "MMMM do, yyyy", { timeZone: TIMEZONE }),
+  rsvpDeadlineDisplay: () =>
+    formatTz(RSVP_DEADLINE_ET, "EEEE, MMMM do", { timeZone: TIMEZONE }),
+  rsvpDeadlineShort: () =>
+    formatTz(RSVP_DEADLINE_ET, "EEE, MMM d", { timeZone: TIMEZONE }),
 };
 
 // Centralized event configuration with computed properties
@@ -101,8 +105,8 @@ export const EVENT_CONFIG = {
 
   // Venue information
   venue: {
-    name: "Our Home",
-    shortName: "Our Home",
+    name: "Rivkah's House",
+    shortName: "Rivkah's House",
     businessName: "",
     address: {
       street: "1086 Lynn Pl Apt 6",
@@ -132,6 +136,8 @@ export const EVENT_CONFIG = {
       deadline: {
         iso: formatEventDate.rsvpDeadlineISO(),
         readable: formatEventDate.rsvpDeadline(),
+        display: formatEventDate.rsvpDeadlineDisplay(),
+        short: formatEventDate.rsvpDeadlineShort(),
       },
       maxGuests: 8,
     };

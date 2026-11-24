@@ -10,6 +10,7 @@ import {
   Loader2,
   AlertCircle,
   PartyPopper,
+  Heart,
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { EVENT_CONFIG } from "../config/eventConfig";
@@ -20,7 +21,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -72,10 +72,32 @@ const DIETARY_OPTIONS = [
   { value: "other", label: "📝 Other (please specify in message)" },
 ];
 
-export default function RSVPForm() {
-  const [isOpen, setIsOpen] = useState(false);
+export function RSVPButton({ onClick }: { onClick: () => void }) {
+  return (
+    <Button
+      size="lg"
+      onClick={onClick}
+      className="bg-gradient-to-r from-pink-500 to-violet-500 text-white hover:from-pink-600 hover:to-violet-600 shadow-xl btn-hover-lift border-0 font-bold px-10 py-4 text-lg rounded-full magical-glow focus-magical"
+    >
+      <span className="mr-2 text-xl" aria-hidden="true">
+        🦄
+      </span>
+      RSVP Now
+    </Button>
+  );
+}
+
+interface RSVPFormProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export default function RSVPForm({ open, onOpenChange }: RSVPFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedAttending, setSubmittedAttending] = useState<
+    "yes" | "no" | null
+  >(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<RSVPFormData>({
@@ -144,14 +166,11 @@ export default function RSVPForm() {
       );
 
       if (result.status === 200) {
+        setSubmittedAttending(data.attending);
         setIsSubmitted(true);
 
         // Close dialog after a delay
-        setTimeout(() => {
-          setIsOpen(false);
-          setIsSubmitted(false);
-          form.reset();
-        }, 3000);
+        setTimeout(() => handleOpenChange(false), 4000);
       } else {
         throw new Error("Failed to send RSVP");
       }
@@ -167,43 +186,34 @@ export default function RSVPForm() {
     }
   };
 
-  const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
-    if (!open) {
+  const handleOpenChange = (nextOpen: boolean) => {
+    onOpenChange(nextOpen);
+    if (!nextOpen) {
       setIsSubmitted(false);
+      setSubmittedAttending(null);
       setSubmitError(null);
       form.reset();
     }
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button
-          size="lg"
-          className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white hover:from-pink-600 hover:via-purple-600 hover:to-cyan-600 shadow-xl btn-hover-lift border-0 font-bold px-10 py-4 text-lg rounded-full magical-glow focus-magical"
-        >
-          <span className="mr-3 text-xl">🦄</span>
-          <Mail className="mr-2 h-5 w-5" />
-          RSVP Now
-          <span className="ml-3 text-xl">✨</span>
-        </Button>
-      </DialogTrigger>
-
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md w-[95vw] max-h-[90vh] overflow-y-auto gradient-magical-card border-2 border-pink-200">
         <DialogHeader className="text-center space-y-4">
-          <div className="flex justify-center items-center gap-2 text-3xl mb-2">
-            <span className="animate-bounce">🦄</span>
-            <span className="animate-bounce delay-200">🌈</span>
-            <span className="animate-bounce delay-400">✨</span>
+          <div className="text-4xl mb-1" aria-hidden="true">
+            🦄
           </div>
           <DialogTitle className="text-2xl font-bold rainbow-text flex items-center justify-center gap-2">
             {isSubmitted ? (
-              <>
-                <CheckCircle className="h-6 w-6 text-green-500" />
-                <span className="text-green-600">Thank You!</span>
-                <span className="text-2xl">🎉</span>
-              </>
+              submittedAttending === "no" ? (
+                <span className="text-violet-700">Thanks for letting us know</span>
+              ) : (
+                <>
+                  <CheckCircle className="h-6 w-6 text-green-500" />
+                  <span className="text-green-600">Thank You!</span>
+                  <span className="text-2xl">🎉</span>
+                </>
+              )
             ) : submitError ? (
               <>
                 <AlertCircle className="h-6 w-6 text-red-500" />
@@ -212,15 +222,15 @@ export default function RSVPForm() {
               </>
             ) : (
               <>
-                <PartyPopper className="h-6 w-6 text-pink-600" />
                 RSVP to Rivkah's Unicorn Party
-                <span className="text-2xl">🎂</span>
               </>
             )}
           </DialogTitle>
           <DialogDescription className="text-gray-600 leading-relaxed">
             {isSubmitted
-              ? "Your RSVP has been sent successfully! We're so excited to celebrate with you. Keep an eye out for any updates about the party details."
+              ? submittedAttending === "no"
+                ? "Your RSVP has been sent. We're sorry you'll miss it!"
+                : "Your RSVP has been sent. We're so excited to celebrate with you!"
               : submitError
               ? "We had trouble sending your RSVP. Please check your internet connection and try again, or contact us directly if the problem persists."
               : "Please let us know if you can join us for Rivkah's magical unicorn birthday celebration! Your response helps us plan the perfect party for everyone."}
@@ -236,43 +246,48 @@ export default function RSVPForm() {
         )}
 
         {isSubmitted ? (
-          <div className="flex flex-col items-center py-8 space-y-6">
-            <div className="relative animate-bounce-magical">
-              <CheckCircle className="h-20 w-20 text-green-500 animate-pulse" />
-              <PartyPopper className="h-8 w-8 text-pink-600 absolute -top-2 -right-2 animate-bounce" />
-              <span className="text-4xl absolute -bottom-2 -left-2 animate-pulse">
-                🦄
-              </span>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="flex justify-center items-center gap-2 text-2xl">
-                <span className="animate-bounce">🎉</span>
-                <span className="animate-bounce delay-200">✨</span>
-                <span className="animate-bounce delay-400">🌈</span>
-              </div>
-              <p className="text-xl font-bold rainbow-text">
-                RSVP Received! Magical!
+          submittedAttending === "no" ? (
+            <div className="flex flex-col items-center py-8 space-y-4 text-center">
+              <Heart className="h-16 w-16 text-pink-400 fill-pink-100" />
+              <p className="text-xl font-bold text-violet-700">
+                Sorry you'll miss it!
               </p>
               <p className="text-gray-600 max-w-sm leading-relaxed">
-                Thank you for responding! We're thrilled you can celebrate with
-                Rivkah. You'll receive a confirmation email shortly with all the
-                party details.
+                Thank you for letting us know. We'll miss you at the party, and
+                we'll save a little unicorn magic for you! 🦄
               </p>
             </div>
-            <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-cyan-50 p-6 rounded-2xl border-2 border-pink-200 text-center magical-glow">
-              <div className="flex justify-center items-center gap-2 text-3xl mb-2">
-                <span className="animate-pulse">🦄</span>
-                <span className="animate-pulse delay-300">💖</span>
-                <span className="animate-pulse delay-600">🧚‍♀️</span>
+          ) : (
+            <div className="flex flex-col items-center py-8 space-y-6">
+              <div className="relative animate-bounce-magical">
+                <CheckCircle className="h-20 w-20 text-green-500" />
+                <span
+                  className="text-4xl absolute -bottom-2 -left-3"
+                  aria-hidden="true"
+                >
+                  🦄
+                </span>
               </div>
-              <p className="text-sm text-pink-700 font-bold">
-                Can't wait to party with you!
-              </p>
-              <p className="text-xs text-purple-600 mt-1">
-                It's going to be absolutely magical! ✨
-              </p>
+              <div className="text-center space-y-3">
+                <p className="text-xl font-bold rainbow-text">
+                  Yay! See you there!
+                </p>
+                <p className="text-gray-600 max-w-sm leading-relaxed">
+                  Thank you for letting us know. Rivkah can't wait to celebrate
+                  with you!
+                </p>
+              </div>
+              <div className="bg-gradient-to-r from-pink-50 to-violet-50 px-6 py-4 rounded-2xl border border-pink-200 text-center">
+                <p className="text-sm text-pink-700 font-bold">
+                  {EVENT_CONFIG.event.date.display} ·{" "}
+                  {EVENT_CONFIG.event.time.duration}
+                </p>
+                <p className="text-xs text-violet-600 mt-1">
+                  {EVENT_CONFIG.venue.address.full}
+                </p>
+              </div>
             </div>
-          </div>
+          )
         ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -315,7 +330,7 @@ export default function RSVPForm() {
                       />
                     </FormControl>
                     <FormDescription className="text-sm">
-                      We'll send you a confirmation and any party updates
+                      Only used if we need to reach you about the party
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -472,7 +487,7 @@ export default function RSVPForm() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => handleOpenChange(false)}
                   disabled={isSubmitting}
                   className="flex-1 h-12"
                 >

@@ -3,7 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon-unicorn.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#ec4899" />
+
+    <!-- Link previews (iMessage, WhatsApp, Facebook, etc.)
+         Keep the date/time in sync with src/config/eventConfig.ts and public/og-image.jpg.
+         %SITE_URL% is filled in at build time from Netlify's URL env var. -->
+    <meta
+      name="description"
+      content="Join us for Rivkah's unicorn birthday party! Sunday, November 29th, 2:30–4:00 PM in Woodmere, NY. Tap to RSVP."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:title" content="You're invited to Rivkah's Unicorn Birthday Party! 🦄" />
+    <meta
+      property="og:description"
+      content="Sunday, November 29th, 2:30–4:00 PM in Woodmere, NY. Tap to RSVP!"
+    />
+    <meta property="og:image" content="%SITE_URL%/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A unicorn with a rainbow next to the words: You're invited to Rivkah's Unicorn Birthday Party" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
